@@ -12,13 +12,11 @@ async function getNews() {
     return;
   }
 
-  // ✅ Use CORS proxy to bypass browser restrictions
-  const proxy = 'https://cors-anywhere.herokuapp.com/';
-  const apiUrl = `https://newsapi.org/v2/everything?q=${location}&language=en&sortBy=publishedAt&apiKey=c3ae1edacc0042588c90e300fedc2a9b`;
-  const fullUrl = proxy + apiUrl;
+  // ✅ Fetch from your serverless backend
+  const apiUrl = `/api/fetchNews?location=${location}`;
 
   try {
-    const response = await fetch(fullUrl);
+    const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error('Could not fetch news. Please try again later.');
     }
